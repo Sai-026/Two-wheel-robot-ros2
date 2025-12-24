@@ -80,39 +80,3 @@ ros2 run two_wheel robot_controller
 
 ## License
 Apache-2.0
-
-## Maintainer
-Updated to default values in package.xml
-```
-
-Save this file and commit it to your repository.
-
----
-
-### **Method 2: Quick Prompt for New Claude Session**
-
-Copy-paste this into a new Claude conversation:
-```
-I have a ROS2 Humble package called "two_wheel" for a differential drive robot simulation. 
-
-Key details:
-- Package: two_wheel
-- Repo name: urdf_gazebo
-- Robot: 2-wheel differential drive with lidar
-- Launch files: two_wheel_display.launch.py (RViz), two_wheel_gazebo.launch.py (Gazebo), rviz_gazebo_combined.launch.py (both)
-- Controller: robot_controller.py (keyboard teleop)
-- License: Apache-2.0
-- Purpose: URDF practice and Gazebo simulation
-
-I need help with [YOUR SPECIFIC QUESTION].
-
-Workspace structure:
-~/ros2_ws/src/two_wheel/
-├── launch/ (3 launch files + combined)
-├── meshes/ (STL files)
-├── two_wheel/robot_controller.py
-├── urdf/two_wheel.urdf
-├── worlds/empty.world
-└── package.xml, setup.py
-
-Bashrc has Gazebo paths configured. Test files are kept.
