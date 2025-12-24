@@ -44,8 +44,9 @@ def generate_launch_description():
             'use_sim_time': True  # IMPORTANT: True for Gazebo sync
         }]
     )
+  
     
-    # 3. Spawn Robot in Gazebo
+    # 4 Spawn Robot in Gazebo
     spawn_entity = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -60,7 +61,7 @@ def generate_launch_description():
         output='screen'
     )
     
-    # 4. RViz Node
+    # 5. RViz Node
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
