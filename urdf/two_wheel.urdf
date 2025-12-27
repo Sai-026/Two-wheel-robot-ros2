@@ -15,7 +15,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/chassis_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/chassis_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.79216 0.81961 0.93333 1" />
@@ -24,7 +24,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/chassis_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/chassis_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -46,7 +46,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/right_wheel_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/right_wheel_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.79216 0.81961 0.93333 1" />
@@ -55,7 +55,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/right_wheel_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/right_wheel_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -79,7 +79,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/left_wheel_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/left_wheel_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.79216 0.81961 0.93333 1" />
@@ -88,7 +88,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/left_wheel_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/left_wheel_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -112,7 +112,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/lidar_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/lidar_link.STL" />
       </geometry>
       <material name="">
         <color rgba="1 1 1 1" />
@@ -121,7 +121,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://two_wheel/meshes/lidar_link.STL" />
+        <mesh filename="file://$(find two_wheel)/meshes/lidar_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -132,24 +132,34 @@
     <child link="lidar_link" />
     <axis xyz="0 0 1" />
   </joint>
-
-  <gazebo>
-    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-      <update_rate>50</update_rate>
-      <left_joint>left_wheel_joint</left_joint>
-      <right_joint>right_wheel_joint</right_joint>
-      <wheel_separation>0.22184</wheel_separation>
-      <wheel_diameter>0.07</wheel_diameter>
-      <max_wheel_torque>20</max_wheel_torque>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <publish_wheel_tf>false</publish_wheel_tf>
-      <odometry_topic>odom</odometry_topic>
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_link</robot_base_frame>
-    </plugin>
-  </gazebo>
+  
+  
+<gazebo>
+  <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+    
+    <update_rate>50</update_rate>
+    
+    <left_joint>left_wheel_joint</left_joint>
+    <right_joint>right_wheel_joint</right_joint>
+    
+    <wheel_separation>0.22184</wheel_separation>
+    <wheel_diameter>0.07</wheel_diameter>
+    
+    <max_wheel_torque>20</max_wheel_torque>
+    <max_wheel_acceleration>1.0</max_wheel_acceleration>
+    
+    <command_topic>cmd_vel</command_topic>
+    
+    <publish_odom>true</publish_odom>
+    <publish_odom_tf>true</publish_odom_tf>
+    <publish_wheel_tf>false</publish_wheel_tf>
+    
+    <odometry_topic>odom</odometry_topic>
+    <odometry_frame>odom</odometry_frame>
+    <robot_base_frame>base_link</robot_base_frame>
+    
+  </plugin>
+</gazebo>
 
   <gazebo reference="chassis_link">
     <material>Gazebo/Blue</material>
@@ -213,6 +223,7 @@
       </plugin>
     </sensor>
   </gazebo>
+  
   <gazebo>
   <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
     <update_rate>20</update_rate>

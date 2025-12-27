@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+from launch.actions import SetEnvironmentVariable
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, ExecuteProcess
+import xacro
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
@@ -14,11 +16,14 @@ def generate_launch_description():
     
     # URDF file path
     urdf_file = os.path.join(pkg_two_wheel, 'urdf', 'two_wheel.urdf')
-    
+
     # Read URDF content
     with open(urdf_file, 'r') as f:
         robot_description = f.read()
     
+    robot_description = xacro.process_file(urdf_file).toxml()
+
+
     # Gazebo launch with proper parameters
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(

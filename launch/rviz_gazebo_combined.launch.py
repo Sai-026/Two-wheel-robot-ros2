@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import xacro
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, TimerAction
@@ -18,6 +19,8 @@ def generate_launch_description():
     # Read URDF content
     with open(urdf_file, 'r') as f:
         robot_description = f.read()
+
+    robot_description = xacro.process_file(urdf_file).toxml()
     
     # RViz config file
     rviz_config_file = os.path.join(pkg_two_wheel, 'rviz', 'display.rviz')
@@ -45,14 +48,7 @@ def generate_launch_description():
         }]
     )
         
-    # 3. Joint State Publisher GUI Node (for manual joint control)
-    joint_state_publisher_gui_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher_gui',
-        output='screen'
-    )
-    
+
     
     # 4 Spawn Robot in Gazebo
     spawn_entity = Node(
